@@ -5,22 +5,14 @@ import java.util.ArrayList;
 
 public class Digits {
 
-    private ArrayList<Integer> digitList;
+    private ArrayList<Integer> digitList = new ArrayList<>();
 
     public Digits(int num)
     {
-        int i = 1;
-        int numDigs = 0;
-
-        while (num % i != num)
+        while (num > 0)
         {
-            numDigs++;
-            i++;
-        }
-
-        for (i = 1; i < numDigs; i++)
-        {
-            digitList.add((0), ((num % (10 ^ i)) / (10 ^ (i - 1))));
+            digitList.add((0), (num % 10));
+            num = num / 10;
         }
     }
 
@@ -28,7 +20,7 @@ public class Digits {
     {
         for (int i = 0; i < digitList.size() - 1; i++)
         {
-            if (digitList.get(i) <= digitList.get(i + 1))
+            if (digitList.get(i) >= digitList.get(i + 1))
                 return false;
         }
         return true;
@@ -36,13 +28,15 @@ public class Digits {
 
     public String getDigitList()
     {
-        String str = "";
+        String str = "[";
 
         for (int i : digitList)
         {
-            str += i;
+            str += i + ", ";
         }
 
+        str = str.substring(0, str.length() - 2);
+        str += "]";
         return str;
     }
 }
